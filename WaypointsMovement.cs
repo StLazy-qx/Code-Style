@@ -18,7 +18,7 @@ public class WaypointsMovement : MonoBehaviour
             _pointsPosition[i] = _waypoints.GetChild(i);
     }
 
-    public void Update()
+    private void Update()
     {
         var currentPoint = _pointsPosition[_pointIndex];
         transform.position = Vector3.MoveTowards(transform.position,

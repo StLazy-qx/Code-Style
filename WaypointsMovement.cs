@@ -4,39 +4,40 @@ using UnityEngine;
 
 public class WaypointsMovement : MonoBehaviour
 {
-    [SerializeField] private Transform _waypoints;
+    [SerializeField] private Transform _way;
 
-    private Transform[] _pointsPosition;
+    private Transform[] _waypoints;
+    private Transform _currentPoint;
     private float _speedMove;
     private int _pointIndex;
 
     private void Start()
     {
-        _pointsPosition = new Transform[_waypoints.childCount];
+        _waypoints = new Transform[_way.childCount];
 
-        for (int i = 0; i < _waypoints.childCount; i++)
-            _pointsPosition[i] = _waypoints.GetChild(i);
+        for (int i = 0; i < _way.childCount; i++)
+            _waypoints[i] = _way.GetChild(i);
+
+        _currentPoint = _waypoints[_pointIndex];
     }
 
     private void Update()
     {
-        var currentPoint = _pointsPosition[_pointIndex];
         transform.position = Vector3.MoveTowards(transform.position,
-            currentPoint.position, _speedMove * Time.deltaTime);
+            _currentPoint.position, _speedMove * Time.deltaTime);
 
-        if (transform.position == currentPoint.position)
+        if (transform.position == _currentPoint.position)
             GetNextPoint();
     }
 
-    private Vector3 GetNextPoint()
+    private void GetNextPoint()
     {
         _pointIndex++;
 
-        if (_pointIndex == _pointsPosition.Length)
+        if (_pointIndex == _waypoints.Length)
             _pointIndex = 0;
 
-        var pointDirection = arrayPlaces[NumberOfPlaceInArrayPlaces].transform.position;
-        transform.forward = pointDirection - transform.position;
-        return pointDirection;
+        _currentPoint = _waypoints[_pointIndex];
+        transform.forward = _currentPoint.position - transform.position;
     }
 }

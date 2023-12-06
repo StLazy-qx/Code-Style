@@ -6,11 +6,11 @@ public class WaypointsMovement : MonoBehaviour
 {
     [SerializeField] private Transform _waypoints;
 
-    private float _speedMove;
     private Transform[] _pointsPosition;
+    private float _speedMove;
     private int _pointIndex;
 
-    void Start()
+    private void Start()
     {
         _pointsPosition = new Transform[_waypoints.childCount];
 
@@ -28,7 +28,7 @@ public class WaypointsMovement : MonoBehaviour
             GetNextPoint();
     }
 
-    public Vector3 GetNextPoint()
+    private Vector3 GetNextPoint()
     {
         _pointIndex++;
 

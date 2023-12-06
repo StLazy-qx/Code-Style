@@ -4,7 +4,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
 
-public class InstantiateBullet : MonoBehaviour
+public class BulletCreating : MonoBehaviour
 {
     [SerializeField] private float _number;
     [SerializeField] private float _timeWaitShooting;
